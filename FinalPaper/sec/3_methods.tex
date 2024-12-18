@@ -1,0 +1,12 @@
+\section{Methods and Experiments}
+\label{sec:formatting}
+In this section, we present our framework for judging Powerlifting squat depth. We will go over data, preprocessing, training, and the decision making by our models. 
+\subsection{Data Collection and Preprocessing}
+The data for this project consisted of barbell squat videos with a single person in focus. Videos for this paper was collected through publicly available videos on Instagram and YouTube. Videos were cropped to isolate the person squatting. The dataset included squat videos from multiple people at different angles in order to make our decision making model more robust. Videos were annotated with a simple boolean value for whether or not the squat shown in the video is depth in order to have a ground truth for the depth decision model to learn. The videos were then fed into our pose estimation model.
+\subsection{Pose Estimation}
+Videos were fed into [insert chosen model here] directly, in order to generate a list of key points and a pose estimation. The pose estimation model was trained on [insert chosen model info here]. This output was then fed into a neural network to learn squat depth. 
+\subsection{Decision Model}
+The output from the pose estimation is fed into our decision model to judge squat depth. The model makes a simple yes/no decision as to whether or not a squat is depth. The model learns as more data is provided. 
+
+%-------------------------------------------------------------------------
+
