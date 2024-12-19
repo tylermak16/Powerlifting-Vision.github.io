@@ -1,12 +1,18 @@
 \section{Methods and Experiments}
 \label{sec:formatting}
-In this section, we present our frameworks for judging Powerlifting squat depth.
+In this section, we present multiple frameworks for judging Powerlifting squat depth.
 \subsection{Comparison Test}
 Comparing output coordinates, world and image (hunter or ben can do this)
 \subsection{Multi-Layer Perceptron}
-Tyler can do this
+Leveraging the three different datasets from the output of Mediapipe's pose landmark detection algorithm, we use a MLP classifier from sklearn to judge squat depth for a variety of images.The features and labels are prepared by removing unnecessary columns and selecting the target labels. A hyperparameter grid is defined to tune the MLP classifier's hidden layer sizes, learning rates, and L2 regularization. Stratified k-fold cross-validation ensures balanced class distribution. Multiple random states are tested to evaluate model robustness, with stratified splitting maintaining class balance during training, validation, and testing to ensure that the small size of the data does not heavily skew performance metrics. Standard scaling is applied to standardize features, improving convergence. GridSearchCV is used to find the best hyperparameters, and the optimal MLP model is trained and evaluated on validation and test sets.
 \subsection{Convolutional Neural Network}
-Tyler can do this
+Using a Convolutional Neural Network on a set of squat images, annotated with a boolean if it is depth or not, we first preprocessed the data by normalizing the pixel values by dividing the pixel values into the range of [\0,1] as neural networks perform better on normalized input. The data is split into a 60/20/20 split before being converted to numpy arrays. A model is then created using Keras. The architecture includes:
+  Three convolutional layers with increasing filter sizes (32, 64, 128), each followed by max pooling.
+  A flattening layer to convert 2D data into a 1D vector.
+  A fully connected dense layer with 128 units and ReLU activation.
+  A dropout layer with a 50\% dropout rate to prevent overfitting.
+  An output dense layer with a sigmoid activation for binary classification
+The model is then compiled using the Adam optimizer, binary cross-entropy loss, and accuracy as the metric used to evaluate performance. Given the limitation of having a small dataset, anymore than three convolutional layers in the architecture results in overfitting of the training data, resulting in 0.5 accuracy on the test data.
 
 %-------------------------------------------------------------------------
 
