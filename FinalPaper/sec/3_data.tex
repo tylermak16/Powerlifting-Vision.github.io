@@ -1,0 +1,11 @@
+\section{Data And Collection}
+\label{sec:formatting}
+\subsection{Data Collection}
+The data for this project consisted of barbell squat videos with a single person in focus. A single frame was manually extracted from each video. Videos for this paper was collected through publicly available videos on Instagram and YouTube, as well as from friends of the authors. Videos were cropped to isolate the person squatting. The dataset included squat videos from multiple people at different angles in order to make our decision making model more robust. A total of 230 videos were collected for this project, with one frame per video being used for the dataset. 
+\subsection{Pre-Processing}
+To preprocess, frames were renamed, indexed, and given an  ``Is Depth" attribute, annotated with a default boolean false value. Frames were then manually annotated by one author, Hunter, as he is an experienced powerlifter with a lot of informal experience of judging squat depth. This information was stored in a CSV file, with the index, frame path, and Is Depth as columns. These frames were then fed into our pose estimation model, provided by Google's MediaPipe, to generate landmarks.  
+\subsection{Landmarks and Pose Estimation}
+When a frame is fed into the pose estimation model provided by Google's MediaPipe, an annotated image was generated, and two sets of landmarks for body locations were generated. The first set is a list of landmarks relative to locations within the image, while the second set is a list of landmarks of real-world positions in 3D space. Each landmark has a corresponding x-coordinate, y-coordinate, and z-coordinate, resulting in 99 numeric data points in each set of landmark, for a total of 198 numeric points for each frame. These values were stored in CSV files, with each column corresponding to the the specific landmarks and their respective x, y, and z values, along with paths to the original frame, the annotated image, and the Is Depth attribute. One CSV file contained only the image landmarks, another contained only the world landmarks, and the third contained both.
+
+%-------------------------------------------------------------------------
+
